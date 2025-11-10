@@ -1,0 +1,486 @@
+
+  .dots {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .dots div {
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+
+  .dots div:nth-child(2) { animation-delay: 0.2s; }
+  .dots div:nth-child(3) { animation-delay: 0.4s; }
+
+  /* animações */
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes pulse {
+    0%,100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* ================= NAVBAR DE ONDAS ================= */
+  .music-wave-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2px;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .wave-bar {
+    flex: 1;
+    background: white;
+    opacity: 0.4;
+    border-bottom-left-radius: 999px;
+    border-bottom-right-radius: 999px;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes wave1 {
+    0%, 100% { height: 15%; }
+    20% { height: 85%; }
+    40% { height: 40%; }
+    60% { height: 65%; }
+    80% { height: 20%; }
+  }
+
+  @keyframes wave2 {
+    0%, 100% { height: 20%; }
+    25% { height: 75%; }
+    50% { height: 35%; }
+    75% { height: 60%; }
+  }
+
+  @keyframes wave3 {
+    0%, 100% { height: 25%; }
+    30% { height: 80%; }
+    60% { height: 45%; }
+    90% { height: 55%; }
+  }
+
+  @keyframes wave4 {
+    0%, 100% { height: 18%; }
+    20% { height: 70%; }
+    45% { height: 50%; }
+    70% { height: 68%; }
+  }
+
+  @keyframes wave5 {
+    0%, 100% { height: 22%; }
+    35% { height: 78%; }
+    55% { height: 42%; }
+    80% { height: 62%; }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* ================= RESET E BASE ================= */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom right, #2043b4, #634996, #09074e);
+  background-attachment: fixed;
+  color: white;
+}
+
+.lumix {
+  font-size: 8rem;
+}
+
+/* ================= HERO ================= */
+.painel-central {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 6rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s ease-out forwards 0.5s;
+}
+
+.painel-central p {
+  font-size: 1.8rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.painel-central p:nth-of-type(1) { animation-delay: 1.5s; }
+.painel-central p:nth-of-type(2) { animation-delay: 2.5s; }
+
+.login-btn {
+    text-decoration: none;
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #634996, #4f46e5);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards 3.5s;
+}
+
+
+
+.login-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* ================= SEÇÃO SOBRE ================= */
+section.sobre {
+  padding: 80px 20px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center { text-align: center; }
+.mb-12 { margin-bottom: 3rem; }
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+p.subtitle {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+
+/* ================= TESTEMUNHOS ================= */
+.testemunhos {
+  text-align: center;
+  padding: 80px 20px;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+.testemunhos .titulo {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 50px;
+  color: #f0f0f0;
+}
+
+.cards2 {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card2 {
+  position: relative;
+  width: 280px;
+  border-radius: 20px;
+  padding: 60px 20px 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card2:hover {
+  transform: translateY(-8px);
+  background: rgba(255,255,255,0.1);
+}
+
+.avatar {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.card-content p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.card-content .cargo {
+  font-size: 13px;
+  color: #aaa;
+  font-style: italic;
+}
+
+
+
+
+/* ============ COMO FUNCIONA ============ */
+
+
+.como-funciona {
+  padding: 100px 20px;
+  text-align: center;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.como-funciona .container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.como-funciona .header h2 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.como-funciona .header p {
+  color: #bbb;
+  font-size: 1.1rem;
+  margin-bottom: 60px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 60px;
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+.step {
+  position: relative;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+  transition-delay: var(--delay);
+}
+
+.step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.numero9 {
+  font-size: 5rem;
+  font-weight: 700;
+
+background-color: white; 
+ -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.2;
+  margin-bottom: 10px;
+}
+
+.step h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: #aaa;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.linha {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .linha {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: -20px;
+    width: 40px;
+    height: 2px;
+background-color: rgba(255, 255, 255, 0.692);  }
+}
+
+
+
+/* ====== ESTATÍSTICAS ====== */
+.stats-section {
+  position: relative;
+  width: 80%;
+  border-radius: 100px;
+  padding: 80px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+    margin: 0 auto;
+}
+
+.stats-section .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.stats-section .container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+  transition-delay: var(--delay);
+}
+
+/* quando estiver visível */
+.stat.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.number {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+  .number {
+    font-size: 3.5rem;
+  }
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+}
+
+
