@@ -89,12 +89,12 @@ class UsuarioDAO
 
         $stmt->execute();
 
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
-    
+
 
     public static function buscarUsuariosParaSeguir($idusuario, $apelido)
     {
@@ -113,28 +113,34 @@ class UsuarioDAO
 
         $stmt->execute();
 
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
     public static function listarUsuariosAleatorios($limite = 3)
-{
-    $conexao = ConexaoBD::conectar();
+    {
+        $conexao = ConexaoBD::conectar();
 
-    $sql = "SELECT apelido, email, foto, idusuario 
+        $sql = "SELECT apelido, email, foto, idusuario 
             FROM usuarios 
             ORDER BY RAND()";
 
-    if ($limite !== null) {
-        $sql .= " LIMIT " . (int)$limite;
+        if ($limite !== null) {
+            $sql .= " LIMIT " . (int)$limite;
+        }
+
+        $stmt = $conexao->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    $stmt = $conexao->prepare($sql);
-    $stmt->execute();
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public static function atualizarFoto($idusuario, $foto) {
+    $con = ConexaoBD::conectar();
+    $sql = "UPDATE usuarios SET foto = ? WHERE idusuario = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->execute([$foto, $idusuario]);
 }
-
 
 }

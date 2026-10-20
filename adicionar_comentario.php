@@ -20,4 +20,3 @@ ComentarioDAO::adicionar($idpostagens, $idusuario, $texto);
 
 $comentarios = ComentarioDAO::listarPorPostagem($idpostagens);
 echo json_encode($comentarios);
-?>

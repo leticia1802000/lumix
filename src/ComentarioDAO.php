@@ -1,10 +1,12 @@
 <?php
 require_once "ConexaoBD.php";
 
-class ComentarioDAO {
+class ComentarioDAO
+{
 
     // Listar comentários de uma postagem
-    public static function listarPorPostagem($idpostagens) {
+    public static function listarPorPostagem($idpostagens)
+    {
         $conexao = ConexaoBD::conectar();
         $sql = "SELECT c.*, u.apelido, u.foto AS foto_usuario
                 FROM comentarios c
@@ -17,7 +19,8 @@ class ComentarioDAO {
     }
 
     // Adicionar novo comentário
-    public static function adicionar($idpostagens, $idusuario, $texto) {
+    public static function adicionar($idpostagens, $idusuario, $texto)
+    {
         $conexao = ConexaoBD::conectar();
         $sql = "INSERT INTO comentarios (idpostagens, idusuario, texto, criado_em)
                 VALUES (:idpostagens, :idusuario, :texto, NOW())";
@@ -29,5 +32,16 @@ class ComentarioDAO {
         ]);
         return $conexao->lastInsertId();
     }
+
+// Contar comentários de uma postagem
+public static function contarComentarios($idpostagens)
+{
+    $conexao = ConexaoBD::conectar();
+    $sql = "SELECT COUNT(*) AS total
+            FROM comentarios
+            WHERE idpostagens = :idpostagens";
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute([':idpostagens' => $idpostagens]);
+    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 }
-?>
+}

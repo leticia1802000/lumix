@@ -85,32 +85,32 @@
             font-size: 0.9rem;
         }
     </style>
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>Sobre a Lumix</h3>
-                <p>A Lumix conecta fãs e artistas em uma comunidade vibrante dedicada à música. Descubra, compartilhe e viva o som.</p>
-            </div>
-
-           
-
-            <div class="footer-section">
-                <h3>Suporte</h3>
-                <ul>
-                    <li>@leticiamacalina</li>
-                     <li>@amandascatollin</li>
-                 
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Redes Sociais</h3>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/lumix.me" target="_blank"><i class="fab fa-instagram"></i></a>
-
-                </div>
-            </div>
+    <div class="footer-grid">
+        <div class="footer-section">
+            <h3>Sobre a Lumix</h3>
+            <p>A Lumix conecta fãs e artistas em uma comunidade vibrante dedicada à música. Descubra, compartilhe e viva o som.</p>
         </div>
 
-        <p class="copy">© 2025 Lumix — Conectando o mundo pela música.</p>
+
+
+        <div class="footer-section">
+            <h3>Suporte</h3>
+            <ul>
+                <li>@leticiamacalina</li>
+                <li>@amandascatollin</li>
+
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Redes Sociais</h3>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/lumix.me" target="_blank"><i class="fab fa-instagram"></i></a>
+
+            </div>
+        </div>
+    </div>
+
+    <p class="copy">© 2025 Lumix — Conectando o mundo pela música.</p>
 
 </footer>

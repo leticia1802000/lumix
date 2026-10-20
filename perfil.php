@@ -19,7 +19,27 @@ $idusuario = $_GET['idusuario'] ?? $_SESSION['idusuario'];
 $usuario = UsuarioDAO::buscarUsuarioId($idusuario);
 $postagens = PostagemDAO::listarPorUsuario($idusuario);
 $musicas = MusicaDAO::listarMusicas($usuario['idusuario']);
- ?>
+// === TROCA DE FOTO DE PERFIL ===
+if ($idusuario == $_SESSION['idusuario'] && isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] === UPLOAD_ERR_OK) {
+  $ext = pathinfo($_FILES['fotoPerfil']['name'], PATHINFO_EXTENSION);
+  $novoNome = uniqid('perfil_') . '.' . $ext;
+  $destino = 'uploads/' . $novoNome;
+
+  if (move_uploaded_file($_FILES['fotoPerfil']['tmp_name'], $destino)) {
+    // Atualiza no banco
+    UsuarioDAO::atualizarFoto($idusuario, $novoNome);
+    // Atualiza sessão
+    $_SESSION['foto'] = $novoNome;
+    // Recarrega página
+    header("Location: perfil.php?idusuario=" . $idusuario);
+    exit;
+  } else {
+    echo '<p style="color:red;text-align:center;">Erro ao enviar a imagem.</p>';
+  }
+}
+
+
+?>
 
 
 <head>
@@ -69,25 +89,30 @@ $musicas = MusicaDAO::listarMusicas($usuario['idusuario']);
     align-self: flex-start;
   }
 
+  .playlist-box h3 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #333;
+    border-bottom: 3px solid #2043b4;
+    display: inline-block;
+    padding-bottom: 5px;
+    margin: 0 auto 20px;
+  }
 
   .profile-header,
   .stats {
     width: 100%;
   }
 
-
-
-
-
-
-
   /* Container da playlist */
   .playlist-box {
-background-color: white
-;    /* fundo escuro */
+    background-color: white;
+    /* fundo escuro */
     padding: 10px;
     border-radius: 10px;
     margin-left: 50px;
+    text-align: center;
   }
 
   /* Lista de músicas */
@@ -101,7 +126,8 @@ background-color: white
   .pl-card {
     display: flex;
     align-items: center;
-background-color: rgba(203, 197, 197, 0.85); /* transparente, elegante */
+    background-color: rgba(203, 197, 197, 0.85);
+    /* transparente, elegante */
     border-radius: 8px;
     padding: 8px;
     transition: background 0.2s;
@@ -153,36 +179,12 @@ background-color: rgba(203, 197, 197, 0.85); /* transparente, elegante */
     font-size: 0.8rem;
   }
 
-
   .pl-controls button {
     background: none;
     border: none;
     color: #000000ff;
     cursor: pointer;
     font-size: 1rem;
-  }
-
-
-
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .col-md-2 {
-      width: 100%;
-    }
-
-    .pl-card {
-      flex-direction: row;
-      padding: 6px;
-    }
-
-    .pl-cover {
-      width: 40px;
-      height: 40px;
-    }
-
-    .pl-info strong {
-      font-size: 0.9rem;
-    }
   }
 </style>
 
@@ -224,26 +226,35 @@ background-color: rgba(203, 197, 197, 0.85); /* transparente, elegante */
         <section class="containerPosts1">
           <div class="perfil-bloco">
             <section class="profile-header">
-              <img src="uploads/<?= $usuario['foto'] ?>" alt="Avatar" class="avatar">
+              <?php if ($idusuario == $_SESSION['idusuario']): ?>
+                <form id="formFotoPerfil" action="atualizar-foto.php" method="POST" enctype="multipart/form-data">
+                  <input type="hidden" name="idusuario" value="<?= $usuario['idusuario'] ?>">
+
+                  <img src="uploads/<?= $usuario['foto'] ?>" alt="Avatar" id="fotoPerfil" class="avatar" style="cursor:pointer;">
+                  <input type="file" id="inputFoto" name="foto" accept="image/*" style="display:none;">
+                </form>
+              <?php else: ?>
+                <img src="uploads/<?= $usuario['foto'] ?>" alt="Avatar" class="avatar">
+              <?php endif; ?>
               <div class="info">
                 <h1 class="name">
-  <?= $usuario['apelido'] ?>
-  <?php
-    if ($usuario['genero'] === 'Feminino') {
-        echo '<i class="fas fa-venus ms-2" title="Feminino"></i>';
-    } elseif ($usuario['genero'] === 'Masculino') {
-        echo '<i class="fas fa-mars ms-2" title="Masculino"></i>';
-    } else {
-        echo '<i class="fas fa-genderless ms-2" title="Outro"></i>';
-    }
-  ?>
-</h1>
+                  <?= $usuario['apelido'] ?>
+                  <?php
+                  if ($usuario['genero'] === 'Feminino') {
+                    echo '<i class="fas fa-venus ms-2" title="Feminino"></i>';
+                  } elseif ($usuario['genero'] === 'Masculino') {
+                    echo '<i class="fas fa-mars ms-2" title="Masculino"></i>';
+                  } else {
+                    echo '<i class="fas fa-genderless ms-2" title="Outro"></i>';
+                  }
+                  ?>
+                </h1>
 
 
                 <div class="username"><?= $usuario['email'] ?></div>
                 <div class="tags">
                   <span class="tag2"><?= $usuario['ocupacao'] ?></span>
-                 
+
 
                 </div>
                 <div class="meta">Membro desde Janeiro 2023</div>
@@ -330,38 +341,38 @@ background-color: rgba(203, 197, 197, 0.85); /* transparente, elegante */
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
         </div>
         <div class="modal-body">
-         <form action="cadastra-musica.php" method="POST" enctype="multipart/form-data">
-  <input type="hidden" name="idusuario" value="<?= $usuario['idusuario'] ?>">
-  
-  <div class="grupo-input1 mb-3">
-    <label class="form-label text-white">Nome da música</label>
-    <textarea name="nomemusica" class="input-field" rows="4" placeholder="Escreva algo..." required></textarea>
-  </div>
+          <form action="cadastra-musica.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="idusuario" value="<?= $usuario['idusuario'] ?>">
 
-  <div class="row">
-    <div class="col grupo-input1 mb-3">
-      <input list="cantores" id="cantormusica" name="cantormusica" class="form-control" placeholder="Digite o cantor..." required>
-      <div id="listaCantores" class="lista-dropdown"></div>
-      <datalist id="cantores">
-        <?php foreach ($cantores as $c): ?>
-          <option value="<?= htmlspecialchars($c['nome']) ?>"></option>
-        <?php endforeach; ?>
-      </datalist>
-    </div>
-  </div>
+            <div class="grupo-input1 mb-3">
+              <label class="form-label text-white">Nome da música</label>
+              <textarea name="nomemusica" class="input-field" rows="4" placeholder="Escreva algo..." required></textarea>
+            </div>
 
-  <div class="grupo-input1 col-6">
-    <label class="form-label text-white">Foto da música</label>
-    <div class="upload2">
-      <div class="preview2" id="imgPreview">+</div>
-      <input class="file-input1" name="fotomusica" type="file" accept="image/*" />
-    </div>
-  </div>
+            <div class="row">
+              <div class="col grupo-input1 mb-3">
+                <input list="cantores" id="cantormusica" name="cantormusica" class="form-control" placeholder="Digite o cantor..." required>
+                <div id="listaCantores" class="lista-dropdown"></div>
+                <datalist id="cantores">
+                  <?php foreach ($cantores as $c): ?>
+                    <option value="<?= htmlspecialchars($c['nome']) ?>"></option>
+                  <?php endforeach; ?>
+                </datalist>
+              </div>
+            </div>
 
-  <div class="d-flex justify-content-center">
-    <button type="submit" class="login-btn">Enviar</button>
-  </div>
-</form>
+            <div class="grupo-input1 col-6">
+              <label class="form-label text-white">Foto da música</label>
+              <div class="upload2">
+                <div class="preview2" id="imgPreview">+</div>
+                <input class="file-input1" name="fotomusica" type="file" accept="image/*" />
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="login-btn">Enviar</button>
+            </div>
+          </form>
 
         </div>
       </div>

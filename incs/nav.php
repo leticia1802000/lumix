@@ -18,7 +18,7 @@ include "incs/valida-sessao.php";
 </head>
 
 
-<section class="navCustom noSelect" >
+<section class="navCustom noSelect">
     <div class="logomarca">
         <a href="site.php">
             <img src="img/logo1.png" alt="Logo" width="90" height="auto">
@@ -46,6 +46,15 @@ include "incs/valida-sessao.php";
         <button id="themeToggle" class="btn tema" type="button" title="Alternar tema">
             <span class="material-icons">light_mode</span>
         </button>
+        <?php
+        $filtroAtual = $_GET['filtro'] ?? 'publico';
+        $novoFiltro = $filtroAtual === 'publico' ? 'privado' : 'publico';
+        $textoBotao = ucfirst($novoFiltro);
+        ?>
+        <a href="site.php?filtro=<?= $novoFiltro ?>" class="nav btn tema">
+            <?= $textoBotao ?>
+        </a>
+
 
         <a href="logout.php" class="nav btn tema">Sair</a>
 

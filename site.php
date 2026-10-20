@@ -10,6 +10,8 @@ require_once "src/UsuarioDAO.php";
 require_once "src/SeguidoDAO.php";
 require_once "src/CurtidaDAO.php";
 require_once "src/PostagemDAO.php";
+require_once "src/ComentarioDAO.php";
+
 
 
 
@@ -20,12 +22,20 @@ $sentimento = isset($_GET['sentimento']) ? $_GET['sentimento'] : 'neutro'; // va
 
 $sentimento = $_GET['sentimento'] ?? 'todos';
 
+$filtro = $_GET['filtro'] ?? 'publico';
+
+
 if ($sentimento === 'todos') {
-  $postagens = PostagemDAO::listarTimeline($idusuario);
+  if ($filtro === 'privado') {
+    $postagens = PostagemDAO::listarPrivadas($idusuario);
+  } else {
+    $postagens = PostagemDAO::listarPublicas();
+  }
 } else {
   $postagens = PostagemDAO::listarPorSentimento($sentimento);
 }
 ?>
+
 
 <!doctype html>
 <html lang="pt-BR">
@@ -66,7 +76,7 @@ if ($sentimento === 'todos') {
               <div class="numero"><?= $seguidor['seguidores'] ?></div><small>Seguidores</small>
             </div>
             <div>
-<div class="numero" id="contador-seguido"><?= $seguido['seguidos'] ?></div><small>Seguindo</small>
+              <div class="numero" id="contador-seguido"><?= $seguido['seguidos'] ?></div><small>Seguindo</small>
             </div>
           </div>
 
@@ -86,7 +96,11 @@ if ($sentimento === 'todos') {
             foreach ($seguidos as $s): ?>
               <div class="usuario-item">
                 <div class="usuario-info">
-                  <img src="uploads/<?= htmlspecialchars($s['foto'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($s['apelido']) ?>" class="usuario-foto">
+                  <!-- MUDADO AQUI -->
+                  <a href="perfil.php?idusuario=<?= $s['idusuario'] ?>">
+                    <img src="uploads/<?= htmlspecialchars($s['foto'] ?? 'default.jpg') ?>" alt="<?= htmlspecialchars($s['apelido']) ?>" class="usuario-foto">
+                  </a>
+                  <!-- ===================== -->
                   <div class="usuario-texto"><strong><?= htmlspecialchars($s['apelido']) ?></strong><small><?= htmlspecialchars($s['email']) ?></small></div>
                 </div>
                 <button class="seguir-btn seguindo" data-id="<?= $s['idusuario'] ?>">Seguindo</button>
@@ -170,21 +184,27 @@ if ($sentimento === 'todos') {
         <?php foreach ($postagens as $postagem):
           $curtiu = CurtidaDAO::jaCurtiu($idusuario, $postagem['idpostagens']);
           $totalCurtidas = CurtidaDAO::contarCurtidas($postagem['idpostagens'])['total'];
+          $totalComentarios = ComentarioDAO::contarComentarios($postagem['idpostagens']);
 
           // Verifica se o usuário logado segue o autor do post
           $segueAutor = SeguidoDAO::verificarSeSegue($idusuario, $postagem['idusuario']);
         ?>
           <div class="post-card1">
             <div class="post-header1">
-              <img src="uploads/<?= $postagem['foto_usuario'] ?>" alt="Avatar" class="profile-img1">
+
+              <!-- MUDAR AQUI -->
+              <a href="perfil.php?idusuario=<?= $postagem['idusuario'] ?>">
+                <img src="uploads/<?= $postagem['foto_usuario'] ?>" alt="Avatar" class="profile-img1">
+              </a>
+              <!-- ----------------------- -->
               <div class="user-info1"><strong><?= $postagem['apelido'] ?></strong></div>
               <div class="tag2"><strong>Sentindo-se <?= $postagem['sentimento'] ?></strong></div>
 
               <!-- Botão de seguir aparece só se não for o próprio usuário e ele ainda não segue -->
-             <!-- Botão de seguir aparece só se não for o próprio usuário e ele ainda não segue -->
-<?php if ($postagem['idusuario'] != $idusuario && !$segueAutor): ?>
-    <a href="#" class="seguir-btn" data-id="<?= $postagem['idusuario'] ?>">Seguir</a>
-<?php endif; ?>
+              <!-- Botão de seguir aparece só se não for o próprio usuário e ele ainda não segue -->
+              <?php if ($postagem['idusuario'] != $idusuario && !$segueAutor): ?>
+                <a href="#" class="seguir-btn" data-id="<?= $postagem['idusuario'] ?>">Seguir</a>
+              <?php endif; ?>
 
             </div>
 
@@ -195,7 +215,10 @@ if ($sentimento === 'todos') {
               </div>
             <?php endif; ?>
 
-            <div class="stats1"><?= $totalCurtidas ?> Curtidas</div>
+            <div class="stats1">
+              <?= $totalCurtidas ?> Curtidas  
+              💬 <?= $totalComentarios ?>
+            </div>
             <div class="actions1">
               <div class="action-btn1">
                 <a href="#" class="btn-curtir" data-id="<?= $postagem['idpostagens'] ?>">
@@ -218,20 +241,6 @@ if ($sentimento === 'todos') {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               <div class="postagem" data-idpostagens="<?= $postagem['idpostagens'] ?>">
                 <?php if ($postagem['idusuario'] == $_SESSION['idusuario']): ?>
                   <div class="action-btn1">
@@ -241,34 +250,6 @@ if ($sentimento === 'todos') {
                   </div>
                 <?php endif; ?>
               </div>
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
           </div>
           <div class="modal fade" id="modalComentariosx<?= $postagem['idpostagens'] ?>" tabindex="-1" aria-labelledby="comentariosLabel<?= $postagem['idpostagens'] ?>" aria-hidden="true">
@@ -307,26 +288,44 @@ if ($sentimento === 'todos') {
             <a href="sugestao.php" class="btn editar">Seguir</a>
           </div>
           <div class="usuarios-lista">
+
+
+            <!--  AQUI -->
             <?php
             $usuarios = UsuarioDAO::listarUsuariosAleatorios(8);
+
             foreach ($usuarios as $u):
+
+              if ($u['idusuario'] == $idusuario) continue;
             ?>
 
-              <?php if ($u['idusuario'] == $idusuario) continue; // pula o próprio usuário 
-              ?>
               <div class="usuario-item">
                 <div class="usuario-info">
                   <img src="uploads/<?= htmlspecialchars($u['foto'] ?? 'default.jpg') ?>"
-                    alt="Foto de <?= htmlspecialchars($u['apelido']) ?>" class="usuario-foto">
+                    alt="Foto de <?= htmlspecialchars($u['apelido']) ?>"
+                    class="usuario-foto">
+
                   <div class="usuario-texto">
                     <strong><?= htmlspecialchars($u['apelido']) ?></strong>
                     <small><?= htmlspecialchars($u['email']) ?></small>
                   </div>
                 </div>
 
-  <button class="seguir-btn" data-id="<?= $u['idusuario'] ?>">Seguir</button>
+                <?php if (SeguidoDAO::verificarSeSegue($idusuario, $u['idusuario'])): ?>
+                  <button class="seguir-btn seguindo" data-id="<?= $u['idusuario'] ?>" data-sugestao="true">
+                    Seguindo
+                  </button>
+                <?php else: ?>
+                  <button class="seguir-btn" data-id="<?= $u['idusuario'] ?>" data-sugestao="true">
+                    Seguir
+                  </button>
+                <?php endif; ?>
+
               </div>
             <?php endforeach; ?>
+            <!-- COLAR -->
+
+
           </div>
         </div>
       </aside>

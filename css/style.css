@@ -10,7 +10,6 @@ body {
   height: 100%;
 }
 
-
 body {
   background: #f5f5f5;
   color: #222;
@@ -20,7 +19,6 @@ body.dark {
   background: #121212;
   color: #f5f5f5;
 }
-
 
 :root {
   --bg1: #2043b4;
@@ -53,7 +51,11 @@ body.dark {
   justify-content: center;
   gap: 100px;
   padding: 16px 20px;
-  background: linear-gradient(90deg, rgba(76, 110, 245, 0.12), rgba(0, 200, 150, 0.04));
+  background: linear-gradient(
+    90deg,
+    rgba(76, 110, 245, 0.12),
+    rgba(0, 200, 150, 0.04)
+  );
   border-radius: 12px;
   margin: 18px;
   max-width: 100%;
@@ -66,7 +68,6 @@ body.dark {
   font-weight: 700;
   font-size: 18px;
 }
-
 
 .pesquisar {
   flex: 1 !important;
@@ -104,20 +105,15 @@ body.dark {
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease,
+  transition: background-color 0.3s ease, transform 0.3s ease,
     box-shadow 0.3s ease;
-
 }
 
 .pesquisar button:hover {
   transform: translateY(-1px);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
   background: linear-gradient(90deg, #634996, #4f46e5);
-
 }
-
 
 .btn.nav {
   display: inline-flex;
@@ -158,16 +154,9 @@ body.dark {
   color: white;
 }
 
-
 .material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
-
-
 
 /* Botão de publicar */
 .submitar-btn {
@@ -181,13 +170,13 @@ body.dark {
   transition: background-color 0.3s;
 }
 
-
-
-
-
-
 .loginSec {
-  background: linear-gradient(to bottom right, var(--bg1), var(--bg2), var(--bg3));
+  background: linear-gradient(
+    to bottom right,
+    var(--bg1),
+    var(--bg2),
+    var(--bg3)
+  );
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -216,7 +205,6 @@ body.dark {
   font-size: 2rem;
 }
 
-
 .grupo-input {
   text-align: left;
   margin-bottom: 0.9rem;
@@ -240,7 +228,7 @@ body.dark {
 }
 
 .grupo-input input::placeholder {
-  color: rgb(255, 255, 255)
+  color: rgb(255, 255, 255);
 }
 
 .login-btn {
@@ -274,23 +262,26 @@ body.dark {
 }
 
 .links-extra a:hover {
-  color: #c4b5fd
+  color: #c4b5fd;
 }
 
 label {
   display: block;
   color: var(--muted);
   font-size: 14px;
-  margin-bottom: 6px
+  margin-bottom: 6px;
 }
-
 
 /* -------------cadastro-------------- */
 .upload {
   display: flex;
   gap: 10px;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
   border-radius: 12px;
   padding: 5px;
   border: 1px dashed rgba(255, 255, 255, 0.06);
@@ -315,18 +306,16 @@ label {
   /* esconde o input real */
 }
 
-
-
 .small {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6)
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* password row */
 .pw-row {
   display: flex;
   gap: 8px;
-  align-items: center
+  align-items: center;
 }
 
 .pw-toggle {
@@ -335,7 +324,7 @@ label {
   color: var(--muted);
   cursor: pointer;
   padding: 8px;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 /* actions */
@@ -343,9 +332,8 @@ label {
   display: flex;
   gap: 12px;
   margin-top: 8px;
-  align-items: center
+  align-items: center;
 }
-
 
 h2 {
   font-size: 2.5rem;
@@ -363,12 +351,23 @@ p.subtitle {
   grid-template-columns: 1fr;
 }
 
+@media (max-height: 800px) { /*/mudei/*/
+  .signup-box {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-height: 700px) {
+  .signup-box {
+    transform: scale(0.8);
+  }
+}
+
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 
 .icon {
   width: 64px;
@@ -385,7 +384,6 @@ p.subtitle {
 .cardTrends h3 {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
-
 }
 
 .cardTrends p {
@@ -396,7 +394,12 @@ p.subtitle {
 
 /* ======== CONTAINER FORM CADASTRO ======== */
 .signup-wrapper {
-  background: linear-gradient(to bottom right, var(--bg1), var(--bg2), var(--bg3));
+  background: linear-gradient(
+    to bottom right,
+    var(--bg1),
+    var(--bg2),
+    var(--bg3)
+  );
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -420,7 +423,6 @@ p.subtitle {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-
 /* ======== CABEÇALHO ======== */
 .signup-wrapper h1 {
   font-size: 2rem;
@@ -440,7 +442,6 @@ label {
   color: var(--muted);
   margin-bottom: 6px;
 }
-
 
 .file-input {
   width: 100%;
@@ -490,7 +491,6 @@ input:focus {
   font-weight: bold;
 }
 
-
 /* ======== AJUSTE DE SENHA ======== */
 .pw-row {
   display: flex;
@@ -507,9 +507,6 @@ input:focus {
   border-radius: 8px;
 }
 
-
-
-
 /* Estilo dos posts */
 .post {
   background-color: #fff;
@@ -521,15 +518,12 @@ input:focus {
   gap: 15px;
 }
 
-
-
 .avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid rgba(99, 73, 150, 0.2);
-  position:   ;
   z-index: 3;
   margin-top: -40px;
   /* avatar flutua sobre a capa */
@@ -549,8 +543,6 @@ input:focus {
   gap: 2px;
 }
 
-
-
 .containerPosts {
   width: 75%;
   max-width: 1000px;
@@ -560,14 +552,10 @@ input:focus {
   z-index: 2;
   align-items: center;
   /* centraliza todos os posts e conteúdo */
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: var(--bg);
   color: var(--text);
 }
-
-
-
-
 
 .cover::after {
   content: "";
@@ -586,7 +574,6 @@ input:focus {
   align-items: flex-start;
   margin-top: 20px;
 }
-
 
 .info {
   flex: 1;
@@ -609,7 +596,6 @@ input:focus {
   gap: 8px;
   flex-wrap: wrap;
 }
-
 
 .tag2 {
   background: #dee3fd;
@@ -723,10 +709,6 @@ input:focus {
   /* mantém a proporção sem cortar */
 }
 
-
-
-
-
 .imgcard {
   width: 200px;
   /* largura fixa */
@@ -741,20 +723,12 @@ input:focus {
   /* centraliza dentro do card */
 }
 
-
-
-
-
-
-
 .btn.tema {
   background: linear-gradient(to right, #634996, #2043b4);
   color: #fff;
   font-weight: 500;
   border: none;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease,
+  transition: background-color 0.3s ease, transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
@@ -763,7 +737,6 @@ input:focus {
   transform: translateY(-1px);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
 }
-
 
 .alert-custom {
   background-color: #ffe6e6;
@@ -789,8 +762,6 @@ input:focus {
   /* transição suave */
 }
 
-
-
 .post-card1 {
   width: 600px;
   background: #fff;
@@ -799,7 +770,6 @@ input:focus {
   overflow: hidden;
   margin-bottom: 20px;
   /* 👉 Espaço entre posts */
-
 }
 
 /* Cabeçalho */
@@ -852,7 +822,6 @@ input:focus {
   display: block;
 }
 
-
 /* Estatísticas */
 .stats1 {
   padding: 10px 15px;
@@ -866,7 +835,7 @@ input:focus {
 /* Ações */
 .actions1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 10px 0;
 }
 
@@ -878,16 +847,12 @@ input:focus {
   font-size: 14px;
   color: #555;
   display: flex;
-  gap: 6px;
-  justify-content: center;
   align-items: center;
 }
 
 .action-btn1:hover {
   background: #f0f2f5;
 }
-
-
 
 .feed {
   display: flex;
@@ -896,7 +861,6 @@ input:focus {
   gap: 20px;
   padding: 20px 0;
 }
-
 
 .post-card1 {
   width: 500px;
@@ -925,7 +889,6 @@ input:focus {
   font-size: 15px;
   display: inline-block;
   color: #161515;
-
 }
 
 .user-info1 span {
@@ -953,16 +916,6 @@ input:focus {
   border-bottom: 1px solid #ddd;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* Container do botão */
 .action-btn1 {
   display: flex;
@@ -983,9 +936,6 @@ input:focus {
   color: inherit;
 }
 
-
-
-
 /* Link do botão */
 .btn-comentar {
   display: flex;
@@ -994,23 +944,6 @@ input:focus {
   text-decoration: none;
   color: inherit;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Ícones */
 .btn-curtir i.fa-regular {
@@ -1021,13 +954,11 @@ input:focus {
 }
 
 .btn-curtir i.fa-solid {
-  color:#634996;
+  color: #634996;
   /* laranja quando curtiu */
   font-size: 16px;
   transition: color 0.2s;
 }
-
-
 
 /* Estilo do botão de excluir */
 .btn-excluir {
@@ -1038,7 +969,7 @@ input:focus {
   color: inherit;
   cursor: pointer;
   font-size: 14px;
-  padding: 8px 12px;
+  padding: 2px 45px;
   border-radius: 4px;
 }
 
@@ -1046,21 +977,19 @@ input:focus {
   color: #634996; /* Cor do ícone do lixo (vermelho) */
 }
 
-
 /* CSS DO PERFIL LATERAL------------------------------------------------- */
 
 .maincontainer {
   justify-content: center;
   max-width: 1200px;
- margin: auto; /* centraliza horizontalmente */
+  margin: auto; /* centraliza horizontalmente */
   gap: 30px;
   align-items: center;
 }
 
-
 .feedprincipal {
   max-width: max-content;
-  width: 100%; 
+  width: 100%;
   border-radius: 8px;
 }
 
@@ -1075,9 +1004,8 @@ input:focus {
   background: #fff;
   border-radius: 10px;
   box-shadow: var(--card-shadow);
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
-
 
 /* Label do campo de postagem */
 .label.postagem {
@@ -1133,7 +1061,6 @@ input:focus {
   padding: 0px;
 }
 
-
 .avatarPerfil {
   width: 80px;
   height: 80px;
@@ -1147,7 +1074,6 @@ input:focus {
   font-weight: 600;
   color: #1a1a1a;
 }
-
 
 /* ESTATÍSTICAS */
 .perfil-stats {
@@ -1201,12 +1127,12 @@ input:focus {
   outline: none;
 
   /* Para deixar redondo */
-  width: 40px;           /* largura do botão */
-  height: 40px;          /* altura do botão */
-  border-radius: 50%;    /* deixa redondo */
-  padding: 0;            /* remove padding extra */
+  width: 40px; /* largura do botão */
+  height: 40px; /* altura do botão */
+  border-radius: 50%; /* deixa redondo */
+  padding: 0; /* remove padding extra */
   display: flex;
-  align-items: center;   /* centraliza o ícone verticalmente */
+  align-items: center; /* centraliza o ícone verticalmente */
   justify-content: center; /* centraliza o ícone horizontalmente */
 }
 
@@ -1219,7 +1145,11 @@ input:focus {
 /* Profile sidebar */
 .cardPerfil {
   width: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.85)
+  );
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -1227,25 +1157,24 @@ input:focus {
   transition: transform 0.2s ease, background 0.3s;
 }
 .cardPerfil:hover {
-      transform: translateY(-3px);
-    }
+  transform: translateY(-3px);
+}
 
 .profile {
   display: flex;
   gap: 12px;
-  align-items: center
+  align-items: center;
 }
 
 .actions {
   display: flex;
   gap: 10px;
-  margin-top: 12px
+  margin-top: 12px;
 }
-
 
 /* Right column */
 .trends h4 {
-  margin: 0 0 12px 0
+  margin: 0 0 12px 0;
 }
 
 .trend-item {
@@ -1254,10 +1183,8 @@ input:focus {
   padding: 8px 10px;
   border-radius: 8px;
   margin-bottom: 8px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent)
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
 }
-
-
 
 /* MODAL */
 
@@ -1274,7 +1201,6 @@ input:focus {
 .modal {
   z-index: 1050 !important;
 }
-
 
 .custom-modal {
   background: linear-gradient(to bottom right, #2043b4, #634996, #09074e);
@@ -1306,9 +1232,7 @@ input:focus {
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.804);
   color: rgba(255, 255, 255, 0.968);
-  
 }
-
 
 .input-field {
   width: 100%;
@@ -1320,20 +1244,16 @@ input:focus {
   background: rgba(255, 255, 255, 0.3);
   color: rgba(255, 255, 255, 0.58);
 
-   min-width: 400px;
+  min-width: 400px;
   max-width: 400px;
   min-height: 100px;
   max-height: 250px;
   resize: both; /* pode redimensionar, mas dentro desses limites */
 }
 
-
-
 .input-field::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
-
-
 
 /* Botão estilo login-btn */
 .login-btn {
@@ -1355,15 +1275,16 @@ input:focus {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-
-
-
 /* -------------cadastro-------------- */
 .upload2 {
   display: flex;
   gap: 10px;
   align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
   border-radius: 12px;
   padding: 5px;
   border: 1px dashed rgba(255, 255, 255, 0.06);
@@ -1387,7 +1308,7 @@ input:focus {
   background: transparent;
   border: 0;
   padding: 0;
-  font-size: 14px
+  font-size: 14px;
 }
 
 .textarea.decorativa {
@@ -1401,8 +1322,6 @@ input:focus {
   resize: none;
   /* desativa redimensionamento */
 }
-
-
 
 /* ==== SUGESTÕES DE PESSOAS ==== */
 
@@ -1429,11 +1348,11 @@ input:focus {
   margin-bottom: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, background 0.3s;
-  margin-left: 50px;  
+  margin-left: 50px;
 }
-    .sugestoes-container:hover {
-      transform: translateY(-3px);
-    }
+.sugestoes-container:hover {
+  transform: translateY(-3px);
+}
 
 .sugestoes-topo {
   display: flex;
@@ -1507,9 +1426,6 @@ input:focus {
   object-fit: cover;
 }
 
-
-
-
 .alert-custom {
   background-color: #ffe6e6;
   /* fundo rosa claro */
@@ -1535,23 +1451,20 @@ input:focus {
 }
 
 .cardTrends {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(255, 255, 255, 0.85)
+  );
   padding: 15px;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: var(--card-shadow);
-    transition: transform 0.2s ease, background 0.3s;
-
+  transition: transform 0.2s ease, background 0.3s;
 }
-  .cardTrends:hover {
-      transform: translateY(-3px);
-    }
-
-    
-
-
-
-
+.cardTrends:hover {
+  transform: translateY(-3px);
+}
 
 .sugestoes-lista {
   display: grid;
@@ -1598,31 +1511,29 @@ input:focus {
 }
 /* Deixa o botão 'Seguir' ou 'Seguindo' alinhado */
 .seguir-btn {
- background-color: #ffffff;
-   color: rgb(6, 6, 6);
+  background-color: #ffffff;
+  color: rgb(6, 6, 6);
   text-decoration: none;
   padding: 6px 12px;
   border-radius: 50px;
-   border: 1px solid #8c919b;
- font-size: 12px;
-   flex-shrink: 0; /* impede o botão de esmagar o texto */
-    cursor: pointer;
-     transition: all 0.3s; 
+  border: 1px solid #8c919b;
+  font-size: 12px;
+  flex-shrink: 0; /* impede o botão de esmagar o texto */
+  cursor: pointer;
+  transition: all 0.3s;
 }
-
 
 .seguir-btn:hover {
   background-color: #fcfdff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
 
 /* Corrige botão quadrado dentro da lateral esquerda */
 .perfil-lateral .seguir-btn {
   border-radius: 20px !important;
   padding: 6px 14px;
- background-color: #ffffff;
+  background-color: #ffffff;
   color: #000000;
   text-decoration: none;
   font-size: 0.85rem;
@@ -1630,8 +1541,7 @@ input:focus {
   text-align: center;
 }
 
-
- select {
+select {
   appearance: none;
   @supports (appearance: base-select) {
     @media (hover: hover) {
@@ -1654,7 +1564,7 @@ select {
   border-radius: 30px;
   cursor: pointer;
   font-weight: 700;
-  
+
   @media (hover: hover) {
     @supports (appearance: base-select) {
       padding-inline: 20px;
@@ -1700,13 +1610,12 @@ select {
         transition-duration: 0.2s;
         transition-timing-function: ease-out;
         &:where(:hover, :focus, :active) {
-                    background: rgb(159, 159, 169);
-
+          background: rgb(159, 159, 169);
 
           color: rgb(0, 0, 0);
         }
         &:checked {
-          background: linear-gradient( #d3bdff);
+          background: linear-gradient(#d3bdff);
           color: rgb(0, 0, 0);
         }
         &::checkmark {
@@ -1719,8 +1628,6 @@ select {
     }
   }
 }
-
-
 
 *,
 *::before,
@@ -1758,17 +1665,12 @@ body.dark .sugestoes-container,
 body.dark .cardpost,
 body.dark .post-card1,
 body.dark .cardTrends,
-
-
-body.dark .modal-content
- {
+body.dark .modal-content {
   background: #1a1a1a !important; /* ligeiramente mais claro que o fundo */
   color: #f5f5f5 !important;
   border-color: #2c2c2c !important;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
 }
-
-
 
 /* ==== FORM PESQUISA E INPUTS ==== */
 body.dark input,
@@ -1814,9 +1716,9 @@ body.dark form.pesquisar {
   background: #2a2a2a;
   border: 1px solid #2c2c2c;
   border-radius: 30px;
-  padding: 0 12px;      /* mais espaço lateral */
+  padding: 0 12px; /* mais espaço lateral */
   gap: 8px;
-  height: 60px;          /* aumenta a altura do form */
+  height: 60px; /* aumenta a altura do form */
   box-sizing: border-box;
 }
 
@@ -1828,9 +1730,9 @@ body.dark form.pesquisar input {
   border: none;
   outline: none;
   border-radius: 25px;
-  padding: 0 20px;      /* mais espaço interno */
+  padding: 0 20px; /* mais espaço interno */
   height: 100%;
-  font-size: 1rem;       /* aumenta o tamanho do texto */
+  font-size: 1rem; /* aumenta o tamanho do texto */
   box-sizing: border-box;
 }
 
@@ -1840,9 +1742,9 @@ body.dark form.pesquisar button {
   color: #fff;
   border: none;
   border-radius: 20px;
-  padding: 8px 16px;     /* aumenta tamanho do botão */
+  padding: 8px 16px; /* aumenta tamanho do botão */
   cursor: pointer;
-  height: 36px;           /* ajusta altura do botão proporcional ao form */
+  height: 36px; /* ajusta altura do botão proporcional ao form */
   font-size: 0.95rem;
 }
 /* ==== TÍTULOS ESPECÍFICOS ==== */
@@ -1860,14 +1762,14 @@ body.dark .post-text1 {
 }
 
 /* NÃO aplica a ocupação nem sentimento */
-.tag, .tag2 strong {
+.tag,
+.tag2 strong {
   color: inherit; /* mantém a cor original, mesmo no dark */
 }
 
 body.dark .numero {
   color: #ffffff !important; /* força todos os <strong> ficarem brancos */
 }
-
 
 body.dark .stats,
 body.dark .stats * {
@@ -1876,8 +1778,7 @@ body.dark .stats * {
 
 /* Dark mode para .stats */
 body.dark .stats {
-  background: #2a2a2a
- !important;  /* fundo preto */
+  background: #2a2a2a !important; /* fundo preto */
   border: 1px solid #2c2c2c !important; /* borda cinza escuro */
   color: #ffffff !important; /* se quiser que o texto fique branco */
 }
@@ -1885,7 +1786,6 @@ body.dark .stats {
 body.dark .seguir-btn {
   background: #7b6cff;
   color: #fff;
- 
 }
 
 /* Estilo para os botões de sentimentos */
@@ -1911,11 +1811,8 @@ body.dark .seguir-btn {
 }
 /* Quando estiver no modo escuro */
 body.dark .usuario-texto strong {
-    color: #fff; /* branco no modo escuro */
+  color: #fff; /* branco no modo escuro */
 }
-
-
-
 
 .btn-enviar {
   background: linear-gradient(90deg, #2043b4, #634996);
@@ -1937,17 +1834,6 @@ body.dark .usuario-texto strong {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* Área dos comentários */
 .comentarios-lista {
@@ -2001,3 +1887,4 @@ body.dark .usuario-texto strong {
   outline: none;
   font-size: 14px;
 }
+

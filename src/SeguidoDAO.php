@@ -20,23 +20,23 @@
 
 
 
-   public static function listarSeguidos($idusuario)
-{
-    $sql = "SELECT u.*
+        public static function listarSeguidos($idusuario)
+        {
+            $sql = "SELECT u.*
             FROM usuarios u
             INNER JOIN seguidos s ON u.idusuario = s.idseguido
             WHERE s.idusuario = ?
-            LIMIT 8";  // ✅ Limite de 4 resultados
+            LIMIT 4";  //  Limite de 4 resultados
 
-    $conexao = ConexaoBD::conectar();
-    $stmt = $conexao->prepare($sql);
-    $stmt->bindParam(1, $idusuario);
-    $stmt->execute();
+            $conexao = ConexaoBD::conectar();
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindParam(1, $idusuario);
+            $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 
-    
+
 
 
         public static function contarSeguidores($idusuario)
@@ -60,39 +60,38 @@
         }
 
 
-        public static function verificarSeSegue($idusuario, $idseguido) {
-    $conexao = ConexaoBD::conectar();
-    $sql = "SELECT COUNT(*) FROM seguidos WHERE idusuario = :idusuario AND idseguido = :idseguido";
-    $stmt = $conexao->prepare($sql);
-    $stmt->bindValue(":idusuario", $idusuario); // quem está seguindo
-    $stmt->bindValue(":idseguido", $idseguido); // quem será seguido
-    $stmt->execute();
-    return $stmt->fetchColumn() > 0;
-}
+        public static function verificarSeSegue($idusuario, $idseguido)
+        {
+            $conexao = ConexaoBD::conectar();
+            $sql = "SELECT COUNT(*) FROM seguidos WHERE idusuario = :idusuario AND idseguido = :idseguido";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(":idusuario", $idusuario); // quem está seguindo
+            $stmt->bindValue(":idseguido", $idseguido); // quem será seguido
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        }
 
 
-public static function deixarDeSeguir($idusuario, $idseguido)
-{
-    $conexao = ConexaoBD::conectar();
+        public static function deixarDeSeguir($idusuario, $idseguido)
+        {
+            $conexao = ConexaoBD::conectar();
 
-    // SQL para remover o seguimento
-    $sql = "DELETE FROM seguidos WHERE idusuario = ? AND idseguido = ?";
+            // SQL para remover o seguimento
+            $sql = "DELETE FROM seguidos WHERE idusuario = ? AND idseguido = ?";
 
-    // Prepara a consulta
-    $stmt = $conexao->prepare($sql);
+            // Prepara a consulta
+            $stmt = $conexao->prepare($sql);
 
-    // Faz o binding dos parâmetros
-    $stmt->bindParam(1, $idusuario);
-    $stmt->bindParam(2, $idseguido);
+            // Faz o binding dos parâmetros
+            $stmt->bindParam(1, $idusuario);
+            $stmt->bindParam(2, $idseguido);
 
-    // Executa a consulta
-    if ($stmt->execute()) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
+            // Executa a consulta
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
     ?>

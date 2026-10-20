@@ -17,4 +17,3 @@ try {
 // Redireciona para a página de login mostrando a mensagem
 header("Location: login.php");
 exit;
-?>

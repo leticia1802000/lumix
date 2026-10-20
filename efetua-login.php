@@ -9,7 +9,7 @@ if ($usuario = UsuarioDAO::validarUsuario($_POST)) {
     $_SESSION['foto'] = $usuario['foto'];
     $_SESSION['fotocapa'] = $usuario['fotocapa'];
     $_SESSION['cantorFav'] = $usuario['cantorFav'];
-       $_SESSION['genero'] = $usuario['genero'];
+    $_SESSION['genero'] = $usuario['genero'];
 
     $_SESSION['ocupacao'] = $usuario['ocupacao'];
     header("Location:site.php");
